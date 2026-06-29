@@ -1,2 +1,2 @@
-# audiorelay-nix
+# Audiorelay Nix package
 Nix package for AudioRelay
