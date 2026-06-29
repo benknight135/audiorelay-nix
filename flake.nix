@@ -1,7 +1,9 @@
 {
   description = "Nix flake packaging AudioRelay";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.follows = "nixpkgs";
+  };
 
   outputs = { self, nixpkgs }:
     let
