@@ -1,10 +1,35 @@
 { stdenv
+, lib
 , fetchurl
 , autoPatchelfHook
 , makeWrapper
 , makeDesktopItem
-, lib
-, ... }:
+, libX11
+, libXext
+, libXi
+, libXrender
+, libXtst
+, cairo
+, harfbuzz
+, pango
+, atk
+, gdk-pixbuf
+, gtk3
+, fontconfig
+, glib
+, libnotify
+, mesa
+, alsa-lib
+, pulseaudio
+, avahi
+, libayatana-appindicator
+, libayatana-indicator
+, ayatana-ido
+, libdbusmenu
+, libsecret
+, zlib
+, ...
+}:
 
 stdenv.mkDerivation rec {
   pname = "audiorelay";
