@@ -1,13 +1,19 @@
 {
-  description = "Nix package for AudioRelay";
+  description = "Nix flake packaging AudioRelay";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
 
   outputs = { self, nixpkgs }:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      drvSet = pkgs.callPackage ./default.nix { };
+      systems = [ "x86_64-linux" ];
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system:
+        f system (import nixpkgs { inherit system; }));
     in {
-      packages.${system}.audiorelay = drvSet.audiorelay;
-      packages.${system}.default = drvSet.audiorelay;
+      packages = forAllSystems (system: pkgs: {
+        audiorelay = pkgs.callPackage ./default.nix { };
+        default = self.packages.${system}.audiorelay;
+      });
     };
 }

@@ -49,6 +49,8 @@ self: super:
     '';
 
     installPhase = ''
+      runHook preInstall
+      
       install -Dm755 AudioRelay/bin/AudioRelay \
         $out/share/audiorelay/bin/AudioRelay
 
@@ -69,6 +71,8 @@ self: super:
 
       install -Dm644 ${desktopItem}/share/applications/audiorelay.desktop \
         $out/share/applications/audiorelay.desktop
+
+      runHook postInstall
     '';
 
     meta = with super.lib; {
