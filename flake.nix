@@ -5,11 +5,9 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      drvSet = pkgs.callPackage ./default.nix { };
     in {
-      packages.${system}.audiorelay =
-        (pkgs.callPackage ./default.nix { }).audiorelay;
-
-      packages.${system}.default =
-        (pkgs.callPackage ./default.nix { }).audiorelay;
+      packages.${system}.audiorelay = drvSet.audiorelay;
+      packages.${system}.default = drvSet.audiorelay;
     };
 }
